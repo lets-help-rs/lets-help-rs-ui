@@ -1,52 +1,65 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { IoCloseSharp } from 'react-icons/io5';
-import { MdAddLocationAlt } from 'react-icons/md';
-import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet';
-import MarkerClusterGroup from 'react-leaflet-cluster';
-import EditablePopup from 'react-leaflet-editable-popup';
+import React, { useState, useCallback, useEffect, useRef } from "react";
+import { IoCloseSharp } from "react-icons/io5";
+import { MdAddLocationAlt } from "react-icons/md";
+import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
+import EditablePopup from "react-leaflet-editable-popup";
 import "leaflet/dist/leaflet.css";
+import Api from "../services/Api";
+import useUserGeolocation from "../hooks/useUserLocation";
+
+const TILE_LAYER_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 const Map = () => {
-  const [center, setCenter] = useState();
-  const [markers, setMarkers] = useState([]);
+  const center = useUserGeolocation();
+  const [collectPoints, setCollectPoints] = useState([]);
   const [addingMarker, setAddingMarker] = useState(false);
 
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        setCenter([position.coords.latitude, position.coords.longitude]);
-      });
-    } else {
-      setCenter([51.505, -0.09]);
+  const pointRef = useRef(null);
+
+  const fetchCollectPoints = useCallback(async () => {
+    const params = {
+      page: 1,
+      take: 100,
+      orderBy: "id",
+      ordering: "desc",
+      state: "SC",
+      city: "Tubarao",
+    };
+    try {
+      const data = await Api.getCollectPoints(params);
+      setCollectPoints(data);
+    } catch (error) {
+      console.error(error.message);
     }
-    fetchMarkers();
   }, []);
 
-  const fetchMarkers = async () => {
-    try {
-      const response = await axios.get('https://yourapi.com/markers');
-      setMarkers(response.data);
-    } catch (error) {
-      console.error('Failed to fetch markers:', error);
-    }
-  };
-
-  const addMarker = async (newMarker) => {
-    try {
-      await axios.post('https://yourapi.com/markers', newMarker);
-      setMarkers(prevMarkers => [...prevMarkers, newMarker]);
-    } catch (error) {
-      console.error('Failed to add marker:', error);
-    }
-  };
+  const handleCreateCollectPoint = useCallback(
+    async (latlng) => {
+      const collectPointData = {
+        state: "SC",
+        city: "Tubarao",
+        description: "Farol Shopping",
+        latitude: latlng.lat,
+        longitude: latlng.lng,
+        reviews: 1,
+      };
+      try {
+        await Api.createCollectPoint(collectPointData);
+        fetchCollectPoints();
+      } catch (error) {
+        console.error(error.message);
+      }
+    },
+    [fetchCollectPoints]
+  );
 
   const AddMarkerOnClick = () => {
     useMapEvents({
       click: (e) => {
         if (addingMarker) {
           const newMarker = e.latlng;
-          addMarker(newMarker);
+          handleCreateCollectPoint(newMarker);
           setAddingMarker(false);
         }
       },
@@ -54,14 +67,26 @@ const Map = () => {
     return null;
   };
 
+  useEffect(() => {
+    fetchCollectPoints();
+  }, [fetchCollectPoints]);
+
   return (
     center && (
       <div>
-        <MapContainer center={center} zoom={13} className="h-screen w-screen relative z-0">
-          <TileLayer url="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <MapContainer
+          center={center}
+          zoom={13}
+          className="h-screen w-screen relative z-0"
+        >
+          <TileLayer url={TILE_LAYER_URL} />
           <MarkerClusterGroup>
-            {markers.map((position, i) => (
-              <Marker key={i} position={position}>
+            {collectPoints.map((point, i) => (
+              <Marker
+                key={i}
+                position={[point.latitude, point.longitude]}
+                ref={pointRef}
+              >
                 <EditablePopup editable open>
                   Adicione aqui informações pertinentes e clique em SALVAR.
                 </EditablePopup>
@@ -72,9 +97,15 @@ const Map = () => {
         </MapContainer>
         <button
           onClick={() => setAddingMarker(!addingMarker)}
-          className={`z-50 fixed bottom-4 right-4 w-20 h-20 rounded-full cursor-pointer ${!addingMarker ? "bg-blue-400" : "bg-red-500"} flex justify-center items-center`}
+          className={`fixed bottom-4 right-4 w-20 h-20 rounded-full cursor-pointer ${
+            addingMarker ? "bg-red-500" : "bg-blue-400"
+          } flex justify-center items-center`}
         >
-          {addingMarker ? <IoCloseSharp className="text-4xl" /> : <MdAddLocationAlt className="text-4xl" />}
+          {addingMarker ? (
+            <IoCloseSharp className="text-4xl" />
+          ) : (
+            <MdAddLocationAlt className="text-4xl" />
+          )}
         </button>
       </div>
     )
