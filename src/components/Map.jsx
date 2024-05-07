@@ -7,6 +7,7 @@ import EditablePopup from "react-leaflet-editable-popup";
 import "leaflet/dist/leaflet.css";
 import Api from "../services/Api";
 import useUserGeolocation from "../hooks/useUserLocation";
+import Search from "./Search";
 
 const TILE_LAYER_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
@@ -80,6 +81,7 @@ const Map = () => {
           className="h-screen w-screen relative z-0"
         >
           <TileLayer url={TILE_LAYER_URL} />
+          <Search /> 
           <MarkerClusterGroup>
             {collectPoints.map((point, i) => (
               <Marker
