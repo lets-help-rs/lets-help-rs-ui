@@ -6,15 +6,13 @@ export const MapContext = createContext();
 export const MapProvider = ({ children }) => {
   const [collectPoints, setCollectPoints] = useState([]);
   const [addingMarker, setAddingMarker] = useState(false);
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
 
   const fetchCollectPoints = useCallback(async () => {
     const params = {
-      page: 1,
-      take: 100,
-      orderBy: "id",
-      ordering: "desc",
-      state: "SC",
-      city: "Tubarao",
+      city: city,
+      state: state
     };
     try {
       const data = await Api.getCollectPoints(params);
@@ -22,16 +20,17 @@ export const MapProvider = ({ children }) => {
     } catch (error) {
       console.error(error.message);
     }
-  }, []);
+  }, [city]);
 
   const handleCreateCollectPoint = useCallback(
     async (latlng) => {
+      console.log('latlng', latlng)
       const collectPointData = {
-        state: "SC",
-        city: "Tubarao",
-        description: "Farol Shopping",
+        state: state,
+        city: city,
         latitude: latlng.lat,
         longitude: latlng.lng,
+        description:" teste",
         reviews: 1,
       };
       try {
@@ -44,13 +43,20 @@ export const MapProvider = ({ children }) => {
     [fetchCollectPoints]
   );
 
+
+  console.log('city', city)
+
   const value = {
     collectPoints,
     setCollectPoints,
     addingMarker,
     setAddingMarker,
     fetchCollectPoints,
-    handleCreateCollectPoint
+    handleCreateCollectPoint,
+    state,
+    setState,
+    city,
+    setCity
   };
 
   return (

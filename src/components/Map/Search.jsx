@@ -1,8 +1,10 @@
 import { useMap } from "react-leaflet";
 import { OpenStreetMapProvider, GeoSearchControl } from "leaflet-geosearch";
-import { useEffect, useCallback, useMemo } from "react";
+import { useEffect, useCallback, useMemo, useContext } from "react";
+import { MapContext } from "../../context/MapContext";
 
-const Search = ({ location }) => {
+const Search = () => {
+  const {city, state} = useContext(MapContext)
   const map = useMap();
 
   const provider = useMemo(() => new OpenStreetMapProvider(), []);
@@ -32,15 +34,15 @@ const Search = ({ location }) => {
 
     map.addControl(searchControl);
 
-    if (location) {
-      performSearchLocation(location);
+    if (city && state) {
+      performSearchLocation(`${city} ${state}`);
     }
 
     return () => {
       map.removeControl(searchControl);
     };
 
-  }, [map, location, performSearchLocation, provider]);
+  }, [map, city, state, performSearchLocation, provider]);
 
   return null;
 };

@@ -9,6 +9,7 @@ const AddMarkerOnClick = () => {
         setAddingMarker,
         handleCreateCollectPoint,
       } = useContext(MapContext);
+      
     useMapEvents({
       click: (e) => {
         if (addingMarker) {

@@ -11,6 +11,7 @@ const useUserGeolocation = () => {
         setLocation([position.coords.latitude, position.coords.longitude]);
       });
     } else {
+      console.log('passou aqui')
       setLocation(DEFAULT_CENTER);
     }
   }, []);

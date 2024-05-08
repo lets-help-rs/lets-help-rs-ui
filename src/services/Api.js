@@ -26,6 +26,22 @@ const Api = {
       throw new Error('Erro ao cadastrar ponto de coleta: ' + error.message);
     }
   },
+  getStates: async () => {
+    try {
+      const response = await api.get('/location/states');
+      return response.data;
+    } catch (error) {
+      throw new Error('Erro ao consultar estados: ' + error.message);
+    }
+  },
+  getCitiesByState: async (state) => {
+    try {
+      const response = await api.get(`/location/cities/${state}`);
+      return response.data;
+    } catch (error) {
+      throw new Error('Erro ao consultar cidades: ' + error.message);
+    }
+  }
 };
 
 export default Api;
