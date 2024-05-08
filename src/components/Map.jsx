@@ -1,14 +1,21 @@
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { MdAddLocationAlt } from "react-icons/md";
-import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  TileLayer,
+  useMapEvents,
+} from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import EditablePopup from "react-leaflet-editable-popup";
+
+import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet/dist/leaflet.css";
 import Api from "../services/Api";
 import useUserGeolocation from "../hooks/useUserLocation";
 import Search from "./Search";
-
+import CircleRadius from "./CircleRadius";
 
 const TILE_LAYER_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
@@ -69,20 +76,15 @@ const Map = () => {
     return null;
   };
 
-  useEffect(() => {
-    fetchCollectPoints();
-  }, [fetchCollectPoints]);
-
+  
   return (
     center && (
       <div className="h-[calc(100vh-6rem)]">
-        <MapContainer
-          center={center}
-          zoom={13}
-          className="relative z-0 h-full"
-        >
+        <MapContainer center={center} zoom={13} className="relative z-0 h-full">
           <TileLayer url={TILE_LAYER_URL} />
-          <Search /> 
+          <Search />
+          <CircleRadius fetchCollectPoints={fetchCollectPoints}/>
+          
           <MarkerClusterGroup>
             {collectPoints.map((point, i) => (
               <Marker
