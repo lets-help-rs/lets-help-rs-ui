@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const API_URL = import.meta.env.VITE_API_URL
@@ -12,7 +15,7 @@ const Api = {
   getCollectPoints: async (params) => {
     try {
       const response = await api.get('/collect-points', { params });
-      return response.data.data;
+      return response.data;
     } catch (error) {
       throw new Error('Erro ao buscar pontos de coleta: ' + error.message);
     }
@@ -23,7 +26,8 @@ const Api = {
       const response = await api.post('/collect-points', collectPointData);
       return response.data;
     } catch (error) {
-      throw new Error('Erro ao cadastrar ponto de coleta: ' + error.message);
+      toast.error('Erro ao cadastrar ponto de coleta')
+      throw new Error('Erro ao cadastrar ponto de coleta: ' + error);
     }
   },
   getStates: async () => {

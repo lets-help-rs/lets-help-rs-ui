@@ -1,5 +1,5 @@
-import React, { createContext, useState, useCallback } from 'react';
-import Api from '../services/Api';
+import React, { createContext, useState, useCallback } from "react";
+import Api from "../services/Api";
 
 export const MapContext = createContext();
 
@@ -12,10 +12,10 @@ export const MapProvider = ({ children }) => {
   const fetchCollectPoints = useCallback(async () => {
     const params = {
       city: city,
-      state: state
+      state: state,
     };
     try {
-      const data = await Api.getCollectPoints(params);
+      const { data } = await Api.getCollectPoints(params);
       setCollectPoints(data);
     } catch (error) {
       console.error(error.message);
@@ -24,13 +24,13 @@ export const MapProvider = ({ children }) => {
 
   const handleCreateCollectPoint = useCallback(
     async (latlng) => {
-      console.log('latlng', latlng)
+      console.log("latlng", latlng);
       const collectPointData = {
         state: state,
         city: city,
         latitude: latlng.lat,
         longitude: latlng.lng,
-        description:" teste",
+        description: " teste",
         reviews: 1,
       };
       try {
@@ -44,7 +44,6 @@ export const MapProvider = ({ children }) => {
   );
 
 
-  console.log('city', city)
 
   const value = {
     collectPoints,
@@ -56,12 +55,8 @@ export const MapProvider = ({ children }) => {
     state,
     setState,
     city,
-    setCity
+    setCity,
   };
 
-  return (
-    <MapContext.Provider value={value}>
-      {children}
-    </MapContext.Provider>
-  );
+  return <MapContext.Provider value={value}>{children}</MapContext.Provider>;
 };

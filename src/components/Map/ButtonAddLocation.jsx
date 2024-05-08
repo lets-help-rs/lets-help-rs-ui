@@ -12,7 +12,7 @@ const ButtonAddLocation = () => {
   return (
     <button
           onClick={() => setAddingMarker(!addingMarker)}
-          className={`fixed bottom-4 right-4 w-20 h-20 rounded-full cursor-pointer ${
+          className={`fixed bottom-14 md:bottom-8 right-4 md:w-20 md:h-20 w-16 h-16 rounded-full cursor-pointer ${
             addingMarker ? "bg-red-500" : "bg-blue-400"
           } flex justify-center items-center`}
         >

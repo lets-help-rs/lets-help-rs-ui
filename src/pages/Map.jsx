@@ -12,12 +12,12 @@ import CircleRadius from "../components/Map/CircleRadius";
 import ButtonAddLocation from "../components/Map/ButtonAddLocation";
 import AddMarkerOnClick from "../components/Map/AddMarkerOnClick";
 import LocationSelector from "../components/Input/LocationSelector";
+import GetCoordinatesMap from "../components/Map/getCoordinatesMap";
 
 const TILE_LAYER_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 const Map = () => {
-  const { collectPoints  } = useContext(MapContext);
-
+  const { collectPoints } = useContext(MapContext);
   const center = useUserGeolocation();
 
   return (
@@ -26,10 +26,7 @@ const Map = () => {
         <LocationSelector />
         <MapContainer center={center} zoom={13} className="relative z-0 h-full">
           <TileLayer url={TILE_LAYER_URL} className="z-0" />
-
           <Search />
-          <CircleRadius/>
-
           <MarkerClusterGroup>
             {collectPoints.map((point, index) => (
               <Marker key={index} position={[point.latitude, point.longitude]}>
@@ -38,9 +35,9 @@ const Map = () => {
                 </EditablePopup>
               </Marker>
             ))}
-
           </MarkerClusterGroup>
           <AddMarkerOnClick />
+          <GetCoordinatesMap />
         </MapContainer>
         <ButtonAddLocation />
       </div>

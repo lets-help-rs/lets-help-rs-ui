@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Api from "../../services/Api";
+import { MapContext } from "../../context/MapContext";
 
-const StateSelector = ({ onStateSelected }) => {
+const StateSelector = () => {
   const [states, setStates] = useState([]);
+  const {setState} = useContext(MapContext)
+
 
   const fetchStates = async () => {
     try {
@@ -19,7 +22,7 @@ const StateSelector = ({ onStateSelected }) => {
 
   return (
     <select
-      onChange={(e) => onStateSelected(e.target.value)}
+      onChange={(e) => setState(e.target.value)}
       defaultValue=""
       className="h-8 bg-white rounded-md shadow-sm border-gray-300 focus:ring focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out px-2"
     >
