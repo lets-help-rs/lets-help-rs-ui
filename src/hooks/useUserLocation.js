@@ -7,11 +7,17 @@ const useUserGeolocation = () => {
 
   useEffect(() => {
     if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLocation([position.coords.latitude, position.coords.longitude]);
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation([position.coords.latitude, position.coords.longitude]);
+        },
+        (error) => {
+          console.error('Error getting location: ', error.message);
+          setLocation(DEFAULT_CENTER);
+        }
+      );
     } else {
-      console.log('passou aqui')
+      console.log('Geolocation is not supported by this browser.');
       setLocation(DEFAULT_CENTER);
     }
   }, []);
