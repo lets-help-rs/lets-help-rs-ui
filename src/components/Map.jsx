@@ -9,6 +9,7 @@ import Api from "../services/Api";
 import useUserGeolocation from "../hooks/useUserLocation";
 import Search from "./Search";
 
+
 const TILE_LAYER_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 const Map = () => {
@@ -74,18 +75,18 @@ const Map = () => {
 
   return (
     center && (
-      <div>
+      <div className="h-[calc(100vh-6rem)]">
         <MapContainer
           center={center}
           zoom={13}
-          className="h-screen w-screen relative z-0"
+          className="relative z-0 h-full"
         >
           <TileLayer url={TILE_LAYER_URL} />
           <Search /> 
           <MarkerClusterGroup>
             {collectPoints.map((point, i) => (
               <Marker
-                key={i}
+                key={point.id}
                 position={[point.latitude, point.longitude]}
                 ref={pointRef}
               >
