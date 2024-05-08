@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { FeatureGroup } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
+import { MapContext } from "../../context/MapContext";
+import 'leaflet-draw/dist/leaflet.draw.css';
 
-const CircleRadius = ({ fetchCollectPoints }) => {
+
+const CircleRadius = () => {
+  const { fetchCollectPoints } = useContext(MapContext);
   const onCreated = (e) => {
     console.log("Layer created:", e.layer);
   };
