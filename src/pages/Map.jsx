@@ -21,7 +21,7 @@ const Map = () => {
   return (
     location && (
       <div className="h-[calc(100vh-6rem)] relative z-0">
-        <MapContainer center={location} zoom={13} className="h-full">
+        <MapContainer center={location} zoom={13} className="h-full z-0">
           <TileLayer url={TILE_LAYER_URL} />
           <Search />
           <MarkerClusterGroup>
