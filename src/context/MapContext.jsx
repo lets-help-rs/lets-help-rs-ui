@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback } from "react";
+import React, { createContext, useState, useCallback, useEffect } from "react";
 import Api from "../services/Api";
 
 export const MapContext = createContext();
@@ -8,29 +8,35 @@ export const MapProvider = ({ children }) => {
   const [addingMarker, setAddingMarker] = useState(false);
   const [city, setCity] = useState();
   const [state, setState] = useState();
+  const [mapDetails, setMapDetails] = useState({
+    coordinates: { lat: null, lng: null },
+    zoom: null,
+  });
+
+
+  console.log(`collectPoints`, collectPoints)
 
   const fetchCollectPoints = useCallback(async () => {
     const params = {
-      city: city,
-      state: state,
+      latitude: mapDetails.coordinates.lat,
+      longitude: mapDetails.coordinates.lng,     
     };
+
     try {
       const { data } = await Api.getCollectPoints(params);
+      console.log(`data`, data)
       setCollectPoints(data);
     } catch (error) {
       console.error(error.message);
     }
-  }, [city]);
+  }, []);
 
   const handleCreateCollectPoint = useCallback(
     async (latlng) => {
       const collectPointData = {
-        state: state,
-        city: city,
         latitude: latlng.lat,
         longitude: latlng.lng,
-        description: " teste",
-        reviews: 1,
+        description: "teste",
       };
       try {
         await Api.createCollectPoint(collectPointData);
@@ -42,7 +48,17 @@ export const MapProvider = ({ children }) => {
     [fetchCollectPoints]
   );
 
+  useEffect(() => {
+    const { coordinates, zoom } = mapDetails;
 
+    console.log(`coordinates`, coordinates)
+
+    if (coordinates.lat && coordinates.lng) {
+
+      console.log('ENTROU:', coordinates)
+      fetchCollectPoints();
+    }
+  }, [mapDetails, fetchCollectPoints]);
 
   const value = {
     collectPoints,
@@ -55,6 +71,8 @@ export const MapProvider = ({ children }) => {
     setState,
     city,
     setCity,
+    mapDetails,
+    setMapDetails,
   };
 
   return <MapContext.Provider value={value}>{children}</MapContext.Provider>;

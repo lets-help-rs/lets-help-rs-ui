@@ -1,20 +1,47 @@
-import React, { useState } from 'react';
-import { useMap, useMapEvents } from 'react-leaflet';
+import React, { useContext, useEffect, useState } from "react";
+import { useMap, useMapEvents } from "react-leaflet";
+import { MapContext } from "../../context/MapContext";
 
 const GetCoordinatesMap = () => {
   const map = useMap();
-  const [mapDetails, setMapDetails] = useState({ coordinates: map.getCenter(), zoom: map.getZoom() });
+  const { mapDetails, setMapDetails } = useContext(MapContext);
+
+  const checkSignificantChange = (newDetails) => {
+    if (newDetails.zoom < 13) {
+      return false;
+    }
+
+    const { coordinates } = mapDetails;
+    const distanceThreshold = 0.05;
+
+    const latChanged =
+      Math.abs(coordinates.lat - newDetails.coordinates.lat) >
+      distanceThreshold;
+    const lngChanged =
+      Math.abs(coordinates.lng - newDetails.coordinates.lng) >
+      distanceThreshold;
+
+    return latChanged || lngChanged;
+  };
 
   useMapEvents({
     moveend: () => {
-      setMapDetails({ coordinates: map.getCenter(), zoom: map.getZoom() });
+      const newDetails = { coordinates: map.getCenter(), zoom: map.getZoom() };
+      if (checkSignificantChange(newDetails)) {
+        setMapDetails(newDetails);
+      }
     },
     zoomend: () => {
-      setMapDetails({ coordinates: map.getCenter(), zoom: map.getZoom() });
-    }
+      const newDetails = { coordinates: map.getCenter(), zoom: map.getZoom() };
+      if (checkSignificantChange(newDetails)) {
+        setMapDetails(newDetails);
+      }
+    },
   });
 
-  console.log(mapDetails)
+  useEffect(() => {
+    setMapDetails({ coordinates: map.getCenter(), zoom: map.getZoom() }); 
+  }, []);
 
   return null;
 };
