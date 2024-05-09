@@ -15,6 +15,7 @@ const GetCoordinatesMap = () => {
 
     const { coordinates } = mapDetails;
     const distanceThreshold = 0.05;
+    const zoomChanged = mapDetails.zoom !== newDetails.zoom;
 
     const latChanged =
       Math.abs(coordinates.lat - newDetails.coordinates.lat) >
@@ -23,8 +24,8 @@ const GetCoordinatesMap = () => {
       Math.abs(coordinates.lng - newDetails.coordinates.lng) >
       distanceThreshold;
 
-    return latChanged || lngChanged;
-  };
+      return latChanged || lngChanged || zoomChanged;
+    };
 
   useMapEvents({
     moveend: () => {
