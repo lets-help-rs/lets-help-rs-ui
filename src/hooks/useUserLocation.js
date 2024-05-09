@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const useUserGeolocation = () => {
   const [location, setLocation] = useState();
+  const [permission, setPermission] = useState('prompt')
 
   const DEFAULT_CENTER = [-30.033056, -51.230000];
 
@@ -10,10 +11,12 @@ const useUserGeolocation = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setLocation([position.coords.latitude, position.coords.longitude]);
+          setPermission('granted');
         },
         (error) => {
           console.error('Error getting location: ', error.message);
           setLocation(DEFAULT_CENTER);
+          setPermission('denied');
         }
       );
     } else {
@@ -22,7 +25,9 @@ const useUserGeolocation = () => {
     }
   }, []);
 
-  return location;
+  console.log('permission', permission)
+
+  return { location, permission };
 };
 
 export default useUserGeolocation;

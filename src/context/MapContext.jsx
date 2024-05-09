@@ -24,7 +24,6 @@ export const MapProvider = ({ children }) => {
 
   const handleCreateCollectPoint = useCallback(
     async (latlng) => {
-      console.log("latlng", latlng);
       const collectPointData = {
         state: state,
         city: city,

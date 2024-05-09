@@ -24,7 +24,7 @@ const StateSelector = () => {
     <select
       onChange={(e) => setState(e.target.value)}
       defaultValue=""
-      className="h-8 bg-white rounded-md shadow-sm border-gray-300 focus:ring focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out px-2"
+      className="h-10 bg-white rounded-md shadow-sm border border-gray-300 focus:ring focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out px-2"
     >
       <option value="" disabled>
         UF

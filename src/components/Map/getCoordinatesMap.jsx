@@ -14,6 +14,8 @@ const GetCoordinatesMap = () => {
     }
   });
 
+  console.log(mapDetails)
+
   return null;
 };
 
