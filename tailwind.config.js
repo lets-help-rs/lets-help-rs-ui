@@ -7,6 +7,7 @@ export default {
         "green-rs": "#007f5f",
         "red-rs": "#d62828",
         "yellow-rs": "#fcbf49",
+        "blue-rs": "#2C84CB"
       },
       keyframes: {
         fadeIn: {

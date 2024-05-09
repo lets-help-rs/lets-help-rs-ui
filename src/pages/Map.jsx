@@ -11,6 +11,7 @@ import ButtonAddLocation from "../components/Map/ButtonAddLocation";
 import Search from "../components/Map/Search";
 import GetCoordinatesMap from "../components/Map/getCoordinatesMap";
 import { MapContext } from "../context/MapContext";
+import { createColorIconById } from "../utils/customMarkers";
 
 const TILE_LAYER_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
@@ -30,7 +31,8 @@ const Map = () => {
                 <Marker
                   key={index}
                   position={[point.latitude, point.longitude]}
-                >
+                  icon={createColorIconById(point.id)}
+                  >
                   <Popup>
                     {point.description}
                   </Popup>
