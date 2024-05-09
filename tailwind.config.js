@@ -17,6 +17,9 @@ export default {
       animation: {
         "fade-in": "fadeIn 2s ease-out forwards",
       },
+      fontFamily: {
+        'custom': ['Inter', 'sans-serif']
+      }
     },
   },
   plugins: [],
