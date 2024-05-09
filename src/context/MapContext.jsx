@@ -28,12 +28,7 @@ export const MapProvider = ({ children }) => {
   }, [mapDetails.coordinates]);
 
   const handleCreateCollectPoint = useCallback(
-    async (latlng) => {
-      const collectPointData = {
-        latitude: latlng.lat,
-        longitude: latlng.lng,
-        description: "teste",
-      };
+    async (collectPointData) => {
       try {
         await Api.createCollectPoint(collectPointData);
         fetchCollectPoints();

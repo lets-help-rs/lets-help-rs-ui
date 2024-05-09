@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import EditablePopup from "react-leaflet-editable-popup";
 
@@ -30,10 +30,11 @@ const Map = () => {
                 <Marker
                   key={index}
                   position={[point.latitude, point.longitude]}
+                  ref={point.ref}
                 >
-                  <EditablePopup editable>
-                    Adicione aqui informações pertinentes e clique em SALVAR.
-                  </EditablePopup>
+                  <Popup>
+                    {point.description}
+                  </Popup>
                 </Marker>
               ))}
           </MarkerClusterGroup>

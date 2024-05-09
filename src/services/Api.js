@@ -21,6 +21,7 @@ const Api = {
   createCollectPoint: async (collectPointData) => {
     try {
       const response = await api.post("/collect-points", collectPointData);
+      toast.success("Ponto de coleta enviado com sucesso.")
       return response.data;
     } catch (error) {
       toast.error(
