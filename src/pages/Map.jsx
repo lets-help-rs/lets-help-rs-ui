@@ -30,7 +30,6 @@ const Map = () => {
                 <Marker
                   key={index}
                   position={[point.latitude, point.longitude]}
-                  ref={point.ref}
                 >
                   <Popup>
                     {point.description}
