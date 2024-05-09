@@ -8,11 +8,9 @@ const ModalLocation = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md z-50 overflow-y-auto">
-      <div className="relative top-1/3 mx-auto p-5 border w-96 md:w-96 shadow-lg rounded-md bg-white">
-        <div className="flex w-full justify-end">
-          <IoClose className="cursor-pointer" onClick={() => onClose()} />
-        </div>
-        <div className="mt-3 text-center flex flex-col">
+      <div className="relative top-1/3 mx-auto p-5 border w-96 md:w-96 shadow-lg rounded-md bg-white  animate-fade-in ">
+      
+        <div className="mt-3 text-center flex flex-col ">
           <h3 className="text-lg leading-6 font-medium text-gray-900">
             Permitir Localização
           </h3>

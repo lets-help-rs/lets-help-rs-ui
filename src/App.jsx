@@ -8,18 +8,20 @@ import ModalLocation from "./components/ModalLocation";
 import useUserGeolocation from "./hooks/useUserLocation";
 
 function App() {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(true);
 
-  const { permission } = useUserGeolocation();
+  const { permission, isLoading } = useUserGeolocation();
 
 
   useEffect(() => {
-    if (permission === 'granted' || permission === 'prompt') {
-      setModalOpen(false);
-    } else {
-      setModalOpen(true)
+    if (!isLoading) { 
+      if (permission === 'granted') {
+        setModalOpen(false);
+      } else {
+        setModalOpen(true);
+      }
     }
-  }, [permission]);
+  }, [permission, isLoading]);
 
 
   return (

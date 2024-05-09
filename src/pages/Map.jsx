@@ -16,7 +16,7 @@ const TILE_LAYER_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 const Map = () => {
   const { collectPoints } = useContext(MapContext);
-  const {location} = useUserGeolocation();
+  const { location } = useUserGeolocation();
 
   return (
     location && (
@@ -25,13 +25,17 @@ const Map = () => {
           <TileLayer url={TILE_LAYER_URL} />
           <Search />
           <MarkerClusterGroup>
-            {collectPoints && collectPoints.map((point, index) => (
-              <Marker key={index} position={[point.latitude, point.longitude]}>
-                <EditablePopup editable open>
-                  Adicione aqui informações pertinentes e clique em SALVAR.
-                </EditablePopup>
-              </Marker>
-            ))}
+            {collectPoints &&
+              collectPoints.map((point, index) => (
+                <Marker
+                  key={index}
+                  position={[point.latitude, point.longitude]}
+                >
+                  <EditablePopup editable open>
+                    Adicione aqui informações pertinentes e clique em SALVAR.
+                  </EditablePopup>
+                </Marker>
+              ))}
           </MarkerClusterGroup>
           <AddMarkerOnClick />
           <GetCoordinatesMap />
