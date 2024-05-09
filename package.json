@@ -21,6 +21,7 @@
     "react-leaflet-cluster": "^2.1.0",
     "react-leaflet-draw": "^0.20.4",
     "react-leaflet-editable-popup": "^2.0.3",
+    "react-qr-code": "^2.0.12",
     "react-toastify": "^10.0.5"
   },
   "devDependencies": {
