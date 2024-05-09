@@ -1,9 +1,9 @@
 import React from "react";
 
 import logo from "/helpRS-logo.png";
-import qrCode from "/qrCode.png";
 
 import { CiWarning } from "react-icons/ci";
+import QRCode from "react-qr-code";
 
 const Header = () => {
   const disclaimer =
@@ -28,9 +28,14 @@ const Header = () => {
         </p>
       </div>
       <div className="flex flex-col md:flex-row md:items-center h-full justify-center md:gap-x-4">
-        <p className="hidden md:block">Chave pix: <span onClick={openDonation} className="cursor-pointer">enchentes@vakinha.com.br</span></p>
-        <img
-          src={qrCode}
+        <div className="md:flex md:flex-col hidden">
+          <span className="self-center">Chave pix: </span>
+          <span onClick={openDonation} className="cursor-pointer">
+            enchentes@vakinha.com.br
+          </span>
+        </div>
+        <QRCode
+          value="https://www.vakinha.com.br/vaquinha/a-maior-campanha-solidaria-do-rs"
           className="h-16 w-16 lg:w-20 lg:h-20 cursor-pointer"
           onClick={openDonation}
         />
