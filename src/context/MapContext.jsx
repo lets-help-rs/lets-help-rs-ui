@@ -13,23 +13,19 @@ export const MapProvider = ({ children }) => {
     zoom: null,
   });
 
-
-  console.log(`collectPoints`, collectPoints)
-
   const fetchCollectPoints = useCallback(async () => {
     const params = {
       latitude: mapDetails.coordinates.lat,
-      longitude: mapDetails.coordinates.lng,     
+      longitude: mapDetails.coordinates.lng,
     };
 
     try {
       const { data } = await Api.getCollectPoints(params);
-      console.log(`data`, data)
       setCollectPoints(data);
     } catch (error) {
       console.error(error.message);
     }
-  }, []);
+  }, [mapDetails.coordinates]);
 
   const handleCreateCollectPoint = useCallback(
     async (latlng) => {
@@ -49,13 +45,9 @@ export const MapProvider = ({ children }) => {
   );
 
   useEffect(() => {
-    const { coordinates, zoom } = mapDetails;
-
-    console.log(`coordinates`, coordinates)
+    const { coordinates } = mapDetails;
 
     if (coordinates.lat && coordinates.lng) {
-
-      console.log('ENTROU:', coordinates)
       fetchCollectPoints();
     }
   }, [mapDetails, fetchCollectPoints]);

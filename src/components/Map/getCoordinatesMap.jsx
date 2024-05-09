@@ -1,13 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useMap, useMapEvents } from "react-leaflet";
 import { MapContext } from "../../context/MapContext";
 
 const GetCoordinatesMap = () => {
   const map = useMap();
-  const { mapDetails, setMapDetails } = useContext(MapContext);
+  const { mapDetails, setMapDetails, setCollectPoints } =
+    useContext(MapContext);
 
   const checkSignificantChange = (newDetails) => {
     if (newDetails.zoom < 13) {
+      setCollectPoints([]);
       return false;
     }
 
@@ -40,7 +42,7 @@ const GetCoordinatesMap = () => {
   });
 
   useEffect(() => {
-    setMapDetails({ coordinates: map.getCenter(), zoom: map.getZoom() }); 
+    setMapDetails({ coordinates: map.getCenter(), zoom: map.getZoom() });
   }, []);
 
   return null;

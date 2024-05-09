@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
-import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import EditablePopup from "react-leaflet-editable-popup";
 
 import useUserGeolocation from "../hooks/useUserLocation";
 
 import "leaflet/dist/leaflet.css";
-import { MapContext } from "../context/MapContext";
-import Search from "../components/Map/Search";
-import ButtonAddLocation from "../components/Map/ButtonAddLocation";
 import AddMarkerOnClick from "../components/Map/AddMarkerOnClick";
+import ButtonAddLocation from "../components/Map/ButtonAddLocation";
+import Search from "../components/Map/Search";
 import GetCoordinatesMap from "../components/Map/getCoordinatesMap";
+import { MapContext } from "../context/MapContext";
 
 const TILE_LAYER_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
@@ -31,7 +31,7 @@ const Map = () => {
                   key={index}
                   position={[point.latitude, point.longitude]}
                 >
-                  <EditablePopup editable open>
+                  <EditablePopup editable>
                     Adicione aqui informações pertinentes e clique em SALVAR.
                   </EditablePopup>
                 </Marker>
