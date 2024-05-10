@@ -8,15 +8,12 @@ const GetCoordinatesMap = () => {
     useContext(MapContext);
 
   const checkSignificantChange = (newDetails) => {
-    if (newDetails.zoom < 13) {
-      setCollectPoints([]);
-      return false;  
-  }
-
     const { coordinates, zoom } = mapDetails;
     const distanceThreshold = 0.05;
 
-    const zoomCrossedThreshold = (zoom <= 13 && newDetails.zoom > 13) || (zoom > 13 && newDetails.zoom <= 13);
+    const zoomCrossedThreshold =
+      (zoom <= 13 && newDetails.zoom > 13) ||
+      (zoom > 13 && newDetails.zoom <= 13);
     const latChanged =
       Math.abs(coordinates.lat - newDetails.coordinates.lat) >
       distanceThreshold;
@@ -30,6 +27,7 @@ const GetCoordinatesMap = () => {
   useMapEvents({
     moveend: () => {
       const newDetails = { coordinates: map.getCenter(), zoom: map.getZoom() };
+      console.log(newDetails.zoom)
       if (checkSignificantChange(newDetails)) {
         setMapDetails(newDetails);
       }

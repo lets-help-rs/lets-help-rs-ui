@@ -22,7 +22,9 @@
     "react-leaflet-cluster": "^2.1.0",
     "react-leaflet-draw": "^0.20.4",
     "react-leaflet-editable-popup": "^2.0.3",
-    "react-qr-code": "^2.0.12"
+    "react-qr-code": "^2.0.12",
+    "react-query": "^3.39.3",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

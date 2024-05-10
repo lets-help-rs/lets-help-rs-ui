@@ -25,7 +25,6 @@ const Map = () => {
         <MapContainer center={location} zoom={13} className="h-full z-0">
           <TileLayer url={TILE_LAYER_URL} />
           <Search />
-          <MarkerClusterGroup>
             {collectPoints &&
               collectPoints.map((point, index) => (
                 <Marker
@@ -38,7 +37,6 @@ const Map = () => {
                   </Popup>
                 </Marker>
               ))}
-          </MarkerClusterGroup>
           <AddMarkerOnClick />
           <GetCoordinatesMap />
         </MapContainer>
