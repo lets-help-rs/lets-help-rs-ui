@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import Header from "./components/Header";
-import { MapProvider } from "./context/MapContext";
 import Map from "./pages/Map";
 import ModalLocation from "./components/ModalLocation";
 import useUserGeolocation from "./hooks/useUserLocation";
-import toast, { Toaster } from "react-hot-toast";
 import Toast from "./components/Toast";
 
 function App() {
@@ -23,22 +21,18 @@ function App() {
     }
   }, [permission, isLoading]);
 
-  
-
   return (
     <>
-      <MapProvider>
-        <div className="h-screen overflow-hidden">
-          <Toast />
-          <ModalLocation
-            isOpen={isModalOpen}
-            onClose={() => setModalOpen(false)}
-          />
-          <Header />
+      <div className="h-screen overflow-hidden">
+        <Toast />
+        <ModalLocation
+          isOpen={isModalOpen}
+          onClose={() => setModalOpen(false)}
+        />
+        <Header />
 
-          <Map />
-        </div>
-      </MapProvider>
+        <Map />
+      </div>
     </>
   );
 }
