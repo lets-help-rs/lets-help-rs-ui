@@ -23,7 +23,6 @@ const useUserGeolocation = () => {
         }
       );
     } else {
-      console.log('Geolocation is not supported by this browser.');
       setLocation(DEFAULT_CENTER);
     }
   }, []);

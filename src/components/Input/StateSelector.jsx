@@ -29,7 +29,7 @@ const StateSelector = () => {
       <option value="" disabled>
         UF
       </option>
-      {states.map((state) => (
+      {states && states.map((state) => (
         <option key={state} value={state}>
           {state}
         </option>
