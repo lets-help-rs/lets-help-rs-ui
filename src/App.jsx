@@ -30,7 +30,6 @@ function App() {
           onClose={() => setModalOpen(false)}
         />
         <Header />
-
         <Map />
       </div>
     </>
