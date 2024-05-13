@@ -3,24 +3,26 @@ import toast from "react-hot-toast";
 import { Popup } from "react-leaflet";
 
 const CustomEditablePopup = ({ onSave }) => {
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState("");
   const textareaRef = useRef(null);
+
+  const placeholderPopup = `Descrição:
+Horário: 
+Itens Aceitos: `;
 
   const adjustTextareaHeight = () => {
     const textarea = textareaRef.current;
     if (!textarea) return;
-    
+
     textarea.style.height = "inherit";
     textarea.style.height = `${textarea.scrollHeight}px`;
   };
 
-
   const handleSave = () => {
-    const trimmedContent = content.trim();
-    if (trimmedContent) {
-      onSave(trimmedContent);
+    if (content) {
+      onSave(content);
     } else {
-        toast.error('Adicione uma descricacao ao ponto de coleta')
+      toast.error("Adicione uma descricacao ao ponto de coleta");
     }
   };
 
@@ -30,7 +32,7 @@ const CustomEditablePopup = ({ onSave }) => {
 
   return (
     <Popup>
-      <div className="flex flex-col p-2 bg-white">
+      <div className="flex flex-col p-2 bg-white ">
         <textarea
           ref={textareaRef}
           value={content}
@@ -39,8 +41,8 @@ const CustomEditablePopup = ({ onSave }) => {
             setContent(e.target.value);
             adjustTextareaHeight();
           }}
-          className="p-2 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-blue-rs resize-none overflow-hidden"
-          rows="1"
+          className="p-2 text-sm border-2 border-gray-300 rounded focus:outline-none focus:border-blue-rs resize-none overflow-hidden min-h-20"
+          placeholder={placeholderPopup}
         />
         <button
           onClick={handleSave}
