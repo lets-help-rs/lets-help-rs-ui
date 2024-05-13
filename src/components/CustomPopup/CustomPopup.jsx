@@ -5,9 +5,7 @@ import { Popup } from "react-leaflet";
 const CustomPopup = ({ onSave, edit, point }) => {
   return (
     <Popup>
-      <div className="flex flex-col p-2 bg-white">
-        {edit ? <EditMode onSave={onSave} /> : <ViewMode point={point} />}
-      </div>
+      {edit ? <EditMode onSave={onSave} /> : <ViewMode point={point} />}
     </Popup>
   );
 };

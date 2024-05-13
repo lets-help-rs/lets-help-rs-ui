@@ -21,6 +21,14 @@ const MapProvider = ({ children }) => {
     }
   };
 
+  const sendReview = async (id, type) => {
+    try {
+      await Api.patchReview(id, type);
+    } catch (error) {
+      console.error(error.message);
+    }
+  }
+
   const value = {
     collectPoints: data?.data ,
     addingMarker,
@@ -33,6 +41,7 @@ const MapProvider = ({ children }) => {
     setCity,
     mapDetails,
     setMapDetails,
+    sendReview
   };
 
   return <MapContext.Provider value={value}>{children}</MapContext.Provider>;

@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         "green-rs": "#007f5f",
+        "green-rs-light": "#00FF00",
         "red-rs": "#d62828",
         "yellow-rs": "#fcbf49",
         "blue-rs": "#2C84CB"

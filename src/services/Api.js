@@ -20,7 +20,7 @@ const Api = {
   createCollectPoint: async (collectPointData) => {
     try {
       const response = await api.post("/collect-points", collectPointData);
-      toast.success("Ponto de coleta enviado com sucesso.")
+      toast.success("Ponto de coleta enviado com sucesso.");
       return response.data;
     } catch (error) {
       toast.error(
@@ -43,6 +43,18 @@ const Api = {
       return response.data;
     } catch (error) {
       throw new Error("Erro ao consultar cidades: " + error.message);
+    }
+  },
+  patchReview: async (id, type) => {
+    console.log(type)
+    try {
+      const response = await api.patch(`/collect-points/review/${id}`, { type });
+      toast.success("Ponto de coleta avaliado com sucesso.");
+      return response.data;
+    } catch (error) {
+      toast.error("Erro ao avaliar ponto de coleta.");
+
+      throw new Error("Erro ao avaliar ponto de coleta: " + error.message);
     }
   },
 };
