@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-cluster";
-import EditablePopup from "react-leaflet-editable-popup";
 
 import useUserGeolocation from "../hooks/useUserLocation";
 

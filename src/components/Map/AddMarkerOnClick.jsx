@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useMapEvents, Marker } from "react-leaflet";
-import EditablePopup from "react-leaflet-editable-popup";
 import { MapContext } from "../../context/MapContext";
+import CustomEditablePopup from "./CustomEditablePopup";
 
 const AddMarkerOnClick = () => {
   const { addingMarker, setAddingMarker, handleCreateCollectPoint } =
@@ -49,14 +49,7 @@ const AddMarkerOnClick = () => {
             },
           }}
         >
-          <EditablePopup
-            editable
-            saveContentCallback={(content) => handleSavePopup(content)}
-            nametag="ponto de coleta"
-          >
-            Para enviar o ponto, edite aqui e clique em salvar! * Adicione mais
-            informações (Ponto de referência, etc..)
-          </EditablePopup>
+          <CustomEditablePopup onSave={handleSavePopup} />
         </Marker>
       )}
     </>
