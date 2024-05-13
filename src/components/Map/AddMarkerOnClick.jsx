@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useMapEvents, Marker } from "react-leaflet";
 import { MapContext } from "../../context/MapContext";
-import CustomEditablePopup from "./CustomEditablePopup";
+import CustomPopup from "../CustomPopup/CustomPopup";
 
 const AddMarkerOnClick = () => {
   const { addingMarker, setAddingMarker, handleCreateCollectPoint } =
@@ -49,7 +49,7 @@ const AddMarkerOnClick = () => {
             },
           }}
         >
-          <CustomEditablePopup onSave={handleSavePopup} />
+          <CustomPopup onSave={handleSavePopup} edit />
         </Marker>
       )}
     </>
