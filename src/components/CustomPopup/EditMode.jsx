@@ -1,19 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { Popup } from "react-leaflet";
 
-const CustomEditablePopup = ({ onSave }) => {
+const EditMode = ({ onSave }) => {
   const [content, setContent] = useState("");
   const textareaRef = useRef(null);
-
-  const placeholderPopup = `Descrição:
-Horário: 
-Itens Aceitos: `;
 
   const adjustTextareaHeight = () => {
     const textarea = textareaRef.current;
     if (!textarea) return;
-
     textarea.style.height = "inherit";
     textarea.style.height = `${textarea.scrollHeight}px`;
   };
@@ -29,10 +23,13 @@ Itens Aceitos: `;
   useEffect(() => {
     adjustTextareaHeight();
   }, [content]);
+  const placeholderPopup = `Descrição:
+Horário: 
+Itens Aceitos: `;
 
   return (
-    <Popup>
-      <div className="flex flex-col p-2 bg-white ">
+    <>
+      <div className="flex flex-col">
         <textarea
           ref={textareaRef}
           value={content}
@@ -51,8 +48,8 @@ Itens Aceitos: `;
           Salvar
         </button>
       </div>
-    </Popup>
+    </>
   );
 };
 
-export default CustomEditablePopup;
+export default EditMode;
