@@ -4,7 +4,7 @@ import { MapContext } from "../../context/MapContext";
 
 const GetCoordinatesMap = () => {
   const map = useMap();
-  const { mapDetails, setMapDetails, setCollectPoints } =
+  const { mapDetails, setMapDetails } =
     useContext(MapContext);
 
   const checkSignificantChange = (newDetails) => {
@@ -27,7 +27,6 @@ const GetCoordinatesMap = () => {
   useMapEvents({
     moveend: () => {
       const newDetails = { coordinates: map.getCenter(), zoom: map.getZoom() };
-      console.log(newDetails.zoom)
       if (checkSignificantChange(newDetails)) {
         setMapDetails(newDetails);
       }
