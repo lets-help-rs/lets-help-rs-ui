@@ -14,7 +14,7 @@ const ModalReview = ({ type, confirmReview, description }) => {
       </div>
       <div className="flex justify-center items-center flex-col">
         <p>Tem certeza de que deseja {text} este ponto?</p>
-        <p className="text-smaller">{description}</p>
+        <p className="text-sm">{description}</p>
       </div>
 
       <div className="flex justify-center mt-4">
