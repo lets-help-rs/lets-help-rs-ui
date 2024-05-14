@@ -23,7 +23,7 @@ const Header = () => {
       </div>
       <div className="w-1/2 lg:w-1/3 flex items-center space-x-2">
         <CiWarning size={100} />
-        <p className="text-white text-[10px] xl:text-sm lg:text-[12px] font-semibold text-center">
+        <p className="text-white text-smallest xl:text-sm lg:text-smaller font-semibold text-center">
           {disclaimer}
         </p>
       </div>

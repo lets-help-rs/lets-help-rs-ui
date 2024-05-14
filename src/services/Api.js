@@ -46,7 +46,6 @@ const Api = {
     }
   },
   patchReview: async (id, type) => {
-    console.log(type)
     try {
       const response = await api.patch(`/collect-points/review/${id}`, { type });
       toast.success("Ponto de coleta avaliado com sucesso.");

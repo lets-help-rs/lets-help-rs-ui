@@ -2,10 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import Api from "../../services/Api";
 import { MapContext } from "../../context/MapContext";
 
-const CitySelector = ({onClose}) => {
+const CitySelector = ({ onClose }) => {
   const [cities, setCities] = useState([]);
-  const {state, setCity} = useContext(MapContext)
-
+  const { state, setCity } = useContext(MapContext);
 
   const fetchCities = async () => {
     try {
@@ -16,18 +15,21 @@ const CitySelector = ({onClose}) => {
     }
   };
 
-  const handleSelectCity = (city) => {
-    setCity(city)
-    onClose();
-  }
-
   useEffect(() => {
-    fetchCities();
+    if (state) {
+      fetchCities();
+    }
   }, [state]);
+
+  const handleSelectCity = (e) => {
+    const city = e.target.value;
+    setCity(city);
+    onClose();
+  };
 
   return (
     <select
-      onChange={(e) => handleSelectCity(e.target.value)}
+      onChange={handleSelectCity}
       defaultValue=""
       className="h-10 bg-white rounded-md shadow-sm border border-gray-300 focus:ring transition duration-200 ease-in-out px-2"
     >

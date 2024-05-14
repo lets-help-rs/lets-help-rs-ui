@@ -5,10 +5,14 @@ export default {
     extend: {
       colors: {
         "green-rs": "#007f5f",
-        "green-rs-light": "#00FF00",
+        "green-check": "#34b233",
+        "green-check-dark": "#278526",
         "red-rs": "#d62828",
+        "red-dark": "#b02121",
         "yellow-rs": "#fcbf49",
-        "blue-rs": "#2C84CB"
+        "blue-rs": "#2C84CB",
+        "blue-rs-dark": "#205f91"
+
       },
       keyframes: {
         fadeIn: {
@@ -21,6 +25,10 @@ export default {
       },
       fontFamily: {
         'custom': ['Inter', 'sans-serif']
+      },
+      fontSize: {
+        smaller: "12px",
+        smallest: "10px"
       }
     },
   },
