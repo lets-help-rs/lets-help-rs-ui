@@ -32,17 +32,17 @@ const ViewMode = ({ point }) => {
       <div className="h-full">
         <p>{description}</p>
         <div className="flex items-end justify-center">
-          <span className="text-smaller text-gray-400 m-0">
+          <span className="text-sm xl:text-smaller text-gray-400 m-0">
             Atualizado em: {formatDate(updatedAt)}
           </span>
           <div className="flex justify-center items-center px-2">
             <MdReport
-              className="text-red-rs w-5 h-5 cursor-pointer"
+              className="text-red-rs w-7 h-7 xl:w-5 xl:h-5 cursor-pointer"
               onClick={() => handleReview("REPORT")}
             />
             <FaCheckCircle
               onClick={() => handleReview("APPROVE")}
-              className="cursor-pointer text-green-check h-4 w-4"
+              className="cursor-pointer text-green-check h-6 w-6 xl:w-4 xl:h-4"
             />
           </div>
         </div>
