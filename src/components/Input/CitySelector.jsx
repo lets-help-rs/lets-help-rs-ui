@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import Select from "react-select";
 import Api from "../../services/Api";
 import { MapContext } from "../../context/MapContext";
 
@@ -21,25 +22,19 @@ const CitySelector = ({ onClose }) => {
     }
   }, [state]);
 
-  const handleSelectCity = (e) => {
-    const city = e.target.value;
-    setCity(city);
+  const handleSelectCity = (selectedOption) => {
+    setCity(selectedOption.value);
     onClose();
   };
 
   return (
-    <select
+    <Select
+      options={cities}
       onChange={handleSelectCity}
-      defaultValue=""
-      className="h-10 bg-white rounded-md shadow-sm border border-gray-300 focus:ring transition duration-200 ease-in-out px-2"
-    >
-      <option value="">Selecione uma cidade</option>
-      {cities && cities.map((city) => (
-        <option key={city.id} value={city.nome}>
-          {city.nome}
-        </option>
-      ))}
-    </select>
+      placeholder="Selecione uma cidade"
+      className="basic-single min-w-44"
+      classNamePrefix="select"
+    />
   );
 };
 

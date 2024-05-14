@@ -25,6 +25,7 @@
     "react-leaflet-editable-popup": "^2.0.3",
     "react-qr-code": "^2.0.12",
     "react-query": "^3.39.3",
+    "react-select": "^5.8.0",
     "swr": "^2.2.5"
   },
   "devDependencies": {
