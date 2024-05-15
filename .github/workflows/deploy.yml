@@ -10,10 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v2
       with:
-        path: ../..
+        repository: lets-help-rs/lets-help-rs-ui
+        path: .
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
