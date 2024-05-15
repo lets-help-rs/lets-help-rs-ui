@@ -24,7 +24,7 @@ jobs:
 
     - name: Build and push frontend image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/lets-help-rs-frontend:latest .
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/lets-help-rs-frontend:latest ./lets-help-rs-ui
         docker push ${{ secrets.DOCKER_USERNAME }}/lets-help-rs-frontend:latest
 
     - name: SSH to server and update frontend container
