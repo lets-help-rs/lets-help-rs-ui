@@ -10,7 +10,11 @@ const CitySelector = ({ onClose }) => {
   const fetchCities = async () => {
     try {
       const citiesFetched = await Api.getCitiesByState(state);
-      setCities(citiesFetched);
+      const formattedCities = citiesFetched.map(city => ({
+        label: city.nome,
+        value: city.id
+      }));
+      setCities(formattedCities);
     } catch (error) {
       console.error("Failed to fetch cities", error);
     }
@@ -23,7 +27,7 @@ const CitySelector = ({ onClose }) => {
   }, [state]);
 
   const handleSelectCity = (selectedOption) => {
-    setCity(selectedOption.value);
+    setCity(selectedOption.label);
     onClose();
   };
 
