@@ -1,10 +1,10 @@
-import { useQuery } from 'react-query';
-import Api from '../services/Api';
+import { useQuery } from "react-query";
+import Api from "../services/Api";
 
 const useCollectPoints = (mapDetails) => {
   const fetchCollectPoints = () => {
-    if (mapDetails.zoom < 13) {
-      return false; 
+    if (mapDetails.zoom <= 13) {
+      return false;
     } else {
       return Api.getCollectPoints({
         latitude: mapDetails.coordinates.lat,
