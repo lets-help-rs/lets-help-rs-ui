@@ -8,7 +8,10 @@ const MapProvider = ({ children }) => {
   const [addingMarker, setAddingMarker] = useState(false);
   const [city, setCity] = useState();
   const [state, setState] = useState();
-  const [mapDetails, setMapDetails] = useState({ coordinates: { lat: null, lng: null }, zoom: null });
+  const [mapDetails, setMapDetails] = useState({
+    coordinates: { lat: null, lng: null },
+    zoom: null,
+  });
 
   const { data, refetch } = useCollectPoints(mapDetails);
 
@@ -21,16 +24,23 @@ const MapProvider = ({ children }) => {
     }
   };
 
-  const sendReview = async (id, type) => {
+  const sendReview = async (id, type, collectPoint) => {
     try {
       await Api.patchReview(id, type);
+      if (type === "REPORT") {
+        collectPoint.badReviews++;
+
+        if (collectPoint.badReviews >= import.meta.env.VITE_REPORT_DELETE) {
+          refetch();
+        }
+      }
     } catch (error) {
       console.error(error.message);
     }
-  }
+  };
 
   const value = {
-    collectPoints: data?.data ,
+    collectPoints: data,
     addingMarker,
     setAddingMarker,
     refetch,
@@ -41,7 +51,7 @@ const MapProvider = ({ children }) => {
     setCity,
     mapDetails,
     setMapDetails,
-    sendReview
+    sendReview,
   };
 
   return <MapContext.Provider value={value}>{children}</MapContext.Provider>;

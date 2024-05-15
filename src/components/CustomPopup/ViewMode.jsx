@@ -18,12 +18,16 @@ const ViewMode = ({ point }) => {
 
   const handleReview = (type) => {
     showModal(
-     <ModalReview type={type} confirmReview={confirmReview} description={description}/>
+      <ModalReview
+        type={type}
+        confirmReview={confirmReview}
+        description={description}
+      />
     );
   };
 
   const confirmReview = (type) => {
-    sendReview(id, type);
+    sendReview(id, type, point);
     hideModal();
   };
 

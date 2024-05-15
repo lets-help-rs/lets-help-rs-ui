@@ -1,15 +1,29 @@
 import { useQuery } from "react-query";
 import Api from "../services/Api";
+import CollectPoint from "../entities/collect-point.entity";
 
 const useCollectPoints = (mapDetails) => {
-  const fetchCollectPoints = () => {
+  const fetchCollectPoints = async () => {
     if (mapDetails.zoom <= 13) {
       return false;
     } else {
-      return Api.getCollectPoints({
+      const response = await Api.getCollectPoints({
         latitude: mapDetails.coordinates.lat,
         longitude: mapDetails.coordinates.lng,
       });
+
+      if (!response?.data)
+        throw new Error(
+          "Ops! Houve um problema interno. Tente novamente mais tarde."
+        );
+
+      const { data } = response;
+
+      const formattedData = data.map((point) => {
+        return CollectPoint.make(point);
+      });
+
+      return formattedData;
     }
   };
 
