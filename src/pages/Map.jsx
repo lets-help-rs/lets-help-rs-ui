@@ -1,22 +1,34 @@
 import React, { useContext } from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
 
 import useUserGeolocation from "../hooks/useUserLocation";
 
+import { useTour } from "@reactour/tour";
 import "leaflet/dist/leaflet.css";
+import { useEffect } from "react";
+import CustomPopup from "../components/CustomPopup/CustomPopup";
 import AddMarkerOnClick from "../components/Map/AddMarkerOnClick";
 import ButtonAddLocation from "../components/Map/ButtonAddLocation";
+import HelpButton from "../components/Map/HelpButton";
 import Search from "../components/Map/Search";
 import GetCoordinatesMap from "../components/Map/getCoordinatesMap";
 import { MapContext } from "../context/MapContext";
+import { useShowTour } from "../hooks/useShowTour";
 import { createColorIconById } from "../utils/customMarkers";
-import CustomPopup from "../components/CustomPopup/CustomPopup";
 
 const TILE_LAYER_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 const Map = () => {
   const { collectPoints } = useContext(MapContext);
   const { location } = useUserGeolocation();
+  const { setIsOpen } = useTour()
+  const { tourWasShown } = useShowTour();
+
+  useEffect( () => {
+    setTimeout(() => {
+      if (!tourWasShown) setIsOpen(true);
+    }, 200);
+  })
 
   return (
     location && (
@@ -37,6 +49,7 @@ const Map = () => {
           <AddMarkerOnClick />
           <GetCoordinatesMap />
         </MapContainer>
+        <HelpButton />
         <ButtonAddLocation />
       </div>
     )

@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <div className="h-[6rem] bg-gradient-to-r from-green-rs  via-red-rs to-yellow-rs flex items-center  text-white justify-around font-custom">
       <div className="flex items-end h-full">
-        <img src={logo} className="h-12 w-12 lg:w-16 lg:h-16" />
+        <img src={logo} className="h-12 w-12 lg:w-16 lg:h-16" id="header-logo" />
       </div>
       <div className="w-1/2 lg:w-1/3 flex items-center space-x-2">
         <CiWarning size={100} />
@@ -27,7 +27,7 @@ const Header = () => {
           {disclaimer}
         </p>
       </div>
-      <div className="flex flex-col md:flex-row md:items-center h-full justify-center md:gap-x-4">
+      <div className="flex flex-col md:flex-row md:items-center h-full justify-center md:gap-x-4" id="qr-code-section">
         <div className="md:flex md:flex-col hidden">
           <span className="self-center">Chave pix: </span>
           <span onClick={openDonation} className="cursor-pointer">
