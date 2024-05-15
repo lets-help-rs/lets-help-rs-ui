@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  frontend:
+    build:
+      context: .
+    container_name: lets-help-rs-frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://api2.letshelprs.online
+      - VITE_REPORT_DELETE=10
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`letshelprs.online`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
+      - "traefik.http.services.frontend.loadbalancer.server.port=5173"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
