@@ -2,8 +2,7 @@ version: '3.7'
 
 services:
   frontend:
-    build:
-      context: .
+    image: phmarquesdev/lets-help-rs-frontend:latest
     container_name: lets-help-rs-frontend
     restart: always
     ports:
