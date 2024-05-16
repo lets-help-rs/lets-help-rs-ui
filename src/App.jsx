@@ -14,12 +14,29 @@ function App() {
   const { showModal, hideModal } = useModal();
   const { setTourWasShown } = useShowTour();
 
+  function saveSelectedCity() {
+    localStorage.setItem("selectedCity", []);
+  }
+
+  function hasSelectedCity() {
+    return Boolean(localStorage.getItem("hasSelectedCity"));
+  }
+
   useEffect(() => {
     if (!isLoading) {
       if (permission === "granted") {
         hideModal();
       } else {
-        showModal(<ModalLocation onClose={hideModal} />);
+        if (hasSelectedCity()) return hideModal();
+
+        showModal(
+          <ModalLocation
+            onClose={() => {
+              hideModal();
+              saveSelectedCity();
+            }}
+          />
+        );
       }
     }
   }, [permission, isLoading]);
