@@ -1,6 +1,6 @@
 import { TourProvider } from "@reactour/tour";
 import React, { useEffect } from "react";
-import { TOUR_STYLES, TOUR_STEPS } from "./assets/contants/tour";
+import { TOUR_STEPS, TOUR_STYLES } from "./assets/contants/tour";
 import Header from "./components/Header";
 import ModalLocation from "./components/Modal/ModalLocation";
 import Toast from "./components/Toast";
@@ -14,11 +14,17 @@ function App() {
   const { showModal, hideModal } = useModal();
   const { setTourWasShown } = useShowTour();
 
+  function hasSelectedLocation() {
+    return Boolean(localStorage.getItem("selectedLocation"));
+  }
+
   useEffect(() => {
     if (!isLoading) {
       if (permission === "granted") {
         hideModal();
       } else {
+        if (hasSelectedLocation()) return hideModal();
+
         showModal(<ModalLocation onClose={hideModal} />);
       }
     }

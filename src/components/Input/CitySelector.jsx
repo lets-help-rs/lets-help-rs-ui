@@ -10,9 +10,9 @@ const CitySelector = ({ onClose }) => {
   const fetchCities = async () => {
     try {
       const citiesFetched = await Api.getCitiesByState(state);
-      const formattedCities = citiesFetched.map(city => ({
+      const formattedCities = citiesFetched.map((city) => ({
         label: city.nome,
-        value: city.id
+        value: city.id,
       }));
       setCities(formattedCities);
     } catch (error) {
@@ -27,9 +27,14 @@ const CitySelector = ({ onClose }) => {
   }, [state]);
 
   const handleSelectCity = (selectedOption) => {
+    saveSelectedLocation(selectedOption.label, state);
     setCity(selectedOption.label);
     onClose();
   };
+
+  function saveSelectedLocation(city, state) {
+    localStorage.setItem("selectedLocation", JSON.stringify({ city, state }));
+  }
 
   return (
     <Select

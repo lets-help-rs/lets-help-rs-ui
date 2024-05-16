@@ -6,8 +6,12 @@ const MapContext = createContext();
 
 const MapProvider = ({ children }) => {
   const [addingMarker, setAddingMarker] = useState(false);
-  const [city, setCity] = useState();
-  const [state, setState] = useState();
+  const [city, setCity] = useState(
+    JSON.parse(localStorage.getItem("selectedLocation"))?.city || undefined
+  );
+  const [state, setState] = useState(
+    JSON.parse(localStorage.getItem("selectedLocation"))?.state || undefined
+  );
   const [mapDetails, setMapDetails] = useState({
     coordinates: { lat: null, lng: null },
     zoom: null,
