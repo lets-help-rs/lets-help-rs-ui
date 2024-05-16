@@ -1,7 +1,6 @@
 import { TourProvider } from "@reactour/tour";
 import React, { useEffect } from "react";
-import { TOUR_STYLES } from "./assets/contants/tour";
-import { TOUR_STEPS } from "./assets/contants/tour-steps";
+import { TOUR_STYLES, TOUR_STEPS } from "./assets/contants/tour";
 import Header from "./components/Header";
 import ModalLocation from "./components/Modal/ModalLocation";
 import Toast from "./components/Toast";
@@ -26,7 +25,8 @@ function App() {
   }, [permission, isLoading]);
 
   return (
-    <TourProvider steps={TOUR_STEPS} 
+    <TourProvider
+      steps={TOUR_STEPS}
       beforeClose={() => setTourWasShown(true)}
       styles={TOUR_STYLES}
     >
