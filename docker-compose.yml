@@ -10,6 +10,8 @@ services:
     environment:
       - VITE_API_URL=http://api2.letshelprs.online
       - VITE_REPORT_DELETE=10
+      - VITE_PIX_KEY=enchentes@vakinha.com.br
+      - VITE_DONATE_QRCODE=https://www.vakinha.com.br/vaquinha/a-maior-campanha-solidaria-do-rs
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`letshelprs.online`)"
