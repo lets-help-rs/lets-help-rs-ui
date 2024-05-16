@@ -1,6 +1,6 @@
 import { TourProvider } from "@reactour/tour";
 import React, { useEffect } from "react";
-import { TOUR_STYLES, TOUR_STEPS } from "./assets/contants/tour";
+import { TOUR_STEPS, TOUR_STYLES } from "./assets/contants/tour";
 import Header from "./components/Header";
 import ModalLocation from "./components/Modal/ModalLocation";
 import Toast from "./components/Toast";
@@ -14,12 +14,8 @@ function App() {
   const { showModal, hideModal } = useModal();
   const { setTourWasShown } = useShowTour();
 
-  function saveSelectedCity() {
-    localStorage.setItem("selectedCity", []);
-  }
-
-  function hasSelectedCity() {
-    return Boolean(localStorage.getItem("hasSelectedCity"));
+  function hasSelectedLocation() {
+    return Boolean(localStorage.getItem("selectedLocation"));
   }
 
   useEffect(() => {
@@ -27,16 +23,9 @@ function App() {
       if (permission === "granted") {
         hideModal();
       } else {
-        if (hasSelectedCity()) return hideModal();
+        if (hasSelectedLocation()) return hideModal();
 
-        showModal(
-          <ModalLocation
-            onClose={() => {
-              hideModal();
-              saveSelectedCity();
-            }}
-          />
-        );
+        showModal(<ModalLocation onClose={hideModal} />);
       }
     }
   }, [permission, isLoading]);
