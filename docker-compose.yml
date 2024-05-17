@@ -20,6 +20,8 @@ services:
       - "traefik.http.services.frontend.loadbalancer.server.port=5173"
     networks:
       - web
+    volumes:
+      - .:/app/frontend 
 
 networks:
   web:
