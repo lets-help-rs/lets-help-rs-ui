@@ -8,10 +8,10 @@ const HelpButton = () => {
   return (
     <button
           id="help-button"
-          className={`fixed bottom-14 md:bottom-8 left-4 md:w-12 md:h-12 w-16 h-16 rounded-full cursor-pointer bg-yellow-rs text-black flex justify-center items-center`}
+          className={`fixed bottom-14 md:bottom-8 left-4 md:w-12 md:h-12 w-11 h-11 rounded-full cursor-pointer bg-yellow-rs text-black flex justify-center items-center`}
           onClick={() => setIsOpen(true)}
         >
-          <IoHelpSharp className="text-4xl md:text-2xl" />
+          <IoHelpSharp className="text-xl md:text-2xl" />
         </button>
   )
 }

@@ -3,7 +3,7 @@ import { IoCloseSharp } from 'react-icons/io5';
 import { MdAddLocationAlt } from 'react-icons/md';
 import { MapContext } from '../../context/MapContext';
 
-const ButtonAddLocation = () => {
+const AddLocationButton = () => {
     const {
         addingMarker,
         setAddingMarker,
@@ -22,4 +22,4 @@ const ButtonAddLocation = () => {
   )
 }
 
-export default ButtonAddLocation
+export default AddLocationButton

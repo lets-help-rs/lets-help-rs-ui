@@ -8,13 +8,13 @@ import "leaflet/dist/leaflet.css";
 import { useEffect } from "react";
 import CustomPopup from "../components/CustomPopup/CustomPopup";
 import AddMarkerOnClick from "../components/Map/AddMarkerOnClick";
-import ButtonAddLocation from "../components/Map/ButtonAddLocation";
 import HelpButton from "../components/Map/HelpButton";
 import Search from "../components/Map/Search";
 import GetCoordinatesMap from "../components/Map/getCoordinatesMap";
 import { MapContext } from "../context/MapContext";
 import { useShowTour } from "../hooks/useShowTour";
 import { createColorIconById } from "../utils/customMarkers";
+import AddLocationButton from "../components/Map/AddLocationButton";
 
 const TILE_LAYER_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
@@ -50,7 +50,7 @@ const Map = () => {
           <GetCoordinatesMap />
         </MapContainer>
         <HelpButton />
-        <ButtonAddLocation />
+        <AddLocationButton />
       </div>
     )
   );
