@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   frontend:
@@ -8,10 +8,10 @@ services:
     ports:
       - "5173:5173"
     environment:
-      - VITE_API_URL=https://api2.letshelprs.online
-      - VITE_REPORT_DELETE=10
-      - VITE_PIX_KEY=enchentes@vakinha.com.br
-      - VITE_DONATE_QRCODE=https://www.vakinha.com.br/vaquinha/a-maior-campanha-solidaria-do-rs
+      - VITE_API_URL=${VITE_API_URL}
+      - VITE_REPORT_DELETE=${VITE_REPORT_DELETE}
+      - VITE_PIX_KEY=${VITE_PIX_KEY}
+      - VITE_DONATE_QRCODE=${VITE_DONATE_QRCODE}
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`letshelprs.online`)"
